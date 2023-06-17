@@ -10,9 +10,17 @@ import (
 )
 
 func main(){
-	r := mux.NewRouter()
-	routes.RegisterBookStoreRoutes(r)
-	http.Handle("/", r)
+	r := mux.NewRouter() 
+	// routes.RegisterBookStoreRoutes(r) 
+	// http.Handle("/", r)
+	// fmt.Println("Server listening on port 8081")
+	// log.Fatal(http.ListenAndServe("localhost:8081", r))
+
+	
+	apiV1 := r.PathPrefix("/api/v1").Subrouter()
+	routes.RegisterBookStoreRoutes(apiV1)
+	
+
 	fmt.Println("Server listening on port 8081")
 	log.Fatal(http.ListenAndServe("localhost:8081", r))
 }
